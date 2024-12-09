@@ -16,7 +16,7 @@ class Persona:
                 self._FechaNacimiento = Evento(args[5], args[6])
             else:
                 self._FechaNacimiento = Evento(args[5], args[6], args[7], args[8], args[9], args[10])
-            self.verificaTuEstado()
+            self.verificaPersona()
         else:
             self._Nombre = ''
             self._Paterno = ''
@@ -35,7 +35,7 @@ class Persona:
     @Nombre.setter
     def Nombre(self, Nombre):
         self._Nombre = Nombre
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     @property
     def Paterno(self):
@@ -44,7 +44,7 @@ class Persona:
     @Paterno.setter
     def Paterno(self, Paterno):
         self._Paterno = Paterno
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     @property
     def Materno(self):
@@ -53,7 +53,7 @@ class Persona:
     @Materno.setter
     def Materno(self, Materno):
         self._Materno = Materno
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     @property
     def Genero(self):
@@ -62,7 +62,7 @@ class Persona:
     @Genero.setter
     def Genero(self, Genero):
         self._Genero = Genero
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     @property
     def estatura(self):
@@ -71,7 +71,7 @@ class Persona:
     @estatura.setter
     def estatura(self, estatura):
         self._estatura = estatura
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     @property
     def FechaNacimiento(self):
@@ -80,7 +80,7 @@ class Persona:
     @FechaNacimiento.setter
     def FechaNacimiento(self, FechaNacimiento):
         self._FechaNacimiento = FechaNacimiento
-        self.verificaTuEstado()
+        self.verificaPersona()
 
     def __str__(self) -> str:
         datos = f'Nombre: {self._Nombre}\n'
@@ -99,15 +99,15 @@ class Persona:
         self._estatura = input('Dame mi estatura ')
         print('Dame mi Fecha de Nacimiento')
         self._FechaNacimiento.pideleAlUsuarioTuEstado()
-        self.verificaTuEstado()
+        self.verificaPersona()
     
     def muestraTuEstado(self):
         print(self)
 
-    def modificaTuEstado(self, *args) -> None:
+    def modificaPersona(self, *args) -> None:
         self.__init__(*args)
 
-    def verificaTuEstado(self):
+    def verificaPersona(self):
         if not isinstance(self._Nombre,str):
             self._Nombre = ''
         if not isinstance(self._Paterno,str):
@@ -125,43 +125,66 @@ class Persona:
         if not isinstance(self._FechaNacimiento, Evento):
             self._FechaNacimiento = Evento()
 
+
 if __name__ == '__main__':
     system('cls')
 
     P1 = Persona()
-    print(f'P1')
-    P1.muestraTuEstado()
+    print(f'P1\n{P1}')
 
-    FN = Evento(1,2,2003,4,5,6)
-    P2 = Persona('Juan','Perez','Lopez','Masculino',1.65,FN)
-    print(f'P2\n{P2}')
+    E = Evento(29,11,2024, 10, 18, 34)
+    P2 = Persona('Juan','Perez','Lopez','Masculino',1.65, E)
+    print(f'P2')
+    P2.muestraTuEstado()
 
-    FFN = Fecha(7,8,2009)
-    HFN = Hora(10,11,12)
-    P3 = Persona('Luisa','Garcia','Hernandez','Femenino',1.75,FFN, HFN)
+    UnaFecha = Fecha(2,12,2024)
+    UnaHora = Hora(7,10,32)
+    P3 = Persona('Luisa','Garcia','Hernandez','Femenino',1.75, UnaFecha, UnaHora)
     print(f'P3\n{P3}')
 
     P4 = Persona('Alfonso','Reyes','Ochoa','Masculino',1.82,17,5,1889,16,17,18)
     print(f'P4\n{P4}')
 
     print(f'P1\n{P1}')
-    print(f'P1')
     P1.pideleAlUsuarioTuEstado()
     print(f'\nP1\n{P1}')
 
-    print('Se intenta P1.modificaTuEstado()')
-    P1.modificaTuEstado()
-    print(f'\nP1\n{P1}')
+    print('Se realiza P1.modificaPersona(P2.Nombre, P2.Paterno, P2.Materno, P2.Genero, P2.estatura, P2.FechaNacimiento)')
+    P1.modificaPersona(P2.Nombre, P2.Paterno, P2.Materno, P2.Genero, P2.estatura, P2.FechaNacimiento)
+    print(f'P2\n{P2}')
+    print(f'P1\n{P1}')
 
-    print('Se intenta P1.modificaTuEstado(1, 2.3, 4, 5.6, \'uno ochenta\', 789)')
-    P1.modificaTuEstado(1, 2.3, 4, 5.6, 'uno ochenta', 789)
-    print(f'\nP1\n{P1}')
+    print('Se realiza P1.modificaPersona(P3.Nombre, P3.Paterno, P3.Materno, P3.Genero, P3.estatura, P3.FechaNacimiento.F, P3.FechaNacimiento.H)')
+    P1.modificaPersona(P3.Nombre, P3.Paterno, P3.Materno, P3.Genero, P3.estatura, P3.FechaNacimiento.F, P3.FechaNacimiento.H)
+    print(f'P3\n{P3}')
+    print(f'P1\n{P1}')
 
-    print('Se intenta asignar valores incorrectos a los atributos')
-    P1.Nombre = 1
-    P1.Paterno = 2.3
-    P1.Materno = 4
-    P1.Genero = 5.6
-    P1.estatura = 'uno ochenta'
-    P1.FechaNacimiento = 789
-    print(f'\nP1\n{P1}')
+    print('Se realiza P1.modificaPersona(P4.Nombre, P4.Paterno, P4.Materno, P4.Genero, P4.estatura, P4.FechaNacimiento.F.dia, P4.FechaNacimiento.F.mes, P4.FechaNacimiento.F.anio, P4.FechaNacimiento.H.hora, P4.FechaNacimiento.H.minuto, P4.FechaNacimiento.H.segundo)')
+    P1.modificaPersona(P4.Nombre, P4.Paterno, P4.Materno, P4.Genero, P4.estatura, P4.FechaNacimiento.F.dia, P4.FechaNacimiento.F.mes, P4.FechaNacimiento.F.anio, P4.FechaNacimiento.H.hora, P4.FechaNacimiento.H.minuto, P4.FechaNacimiento.H.segundo)
+    print(f'P4\n{P4}')
+    print(f'P1\n{P1}')
+
+    print('Se intenta Persona(12.3, 45.6, 78.9, 8.76, \'uno sesenta\', 123)')
+    P5 = Persona(12.3, 45.6, 78.9, 8.76, 'uno sesenta', 123)
+    print(f'P5\n{P5}')
+
+    print('Se intenta P5.modificaPersona(12.3, 45.6, 78.9, 8.76, \'uno sesenta\', 123, 456)')
+    P5.modificaPersona(12.3, 45.6, 78.9, 8.76, 'uno sesenta', 123, 456)
+    print(f'P5\n{P5}')
+
+    print('Se intenta P5.modificaPersona(12.3, 45.6, 78.9, 8.76, \'uno sesenta\', 123)')
+    P5.modificaPersona(12.3, 45.6, 78.9, 8.76, 'uno sesenta', 123)
+    print(f'P5\n{P5}')
+
+    print('Se intenta P5.modificaPersona(12.3, 45.6, 78.9, 8.76, \'uno sesenta\', \'1.2\', \'3.4\', \'5.6\', \'7.8\', \'9.8\', \'7.6\')')
+    P5.modificaPersona(12.3, 45.6, 78.9, 8.76, 'uno sesenta', '1.2', '3.4', '5.6', '7.8', '9.8', '7.6')
+    print(f'P5\n{P5}')
+
+    print('Se intenta asignar valores incorrectos a los atributos de P5')
+    P5.Nombre = 12.3
+    P5.Paterno = 45.6
+    P5.Materno = 78.9
+    P5.Genero = 8.76
+    P5.estatura = 'uno sesenta'
+    P5.FechaNacimiento = 123
+    print(f'P5\n{P5}')
